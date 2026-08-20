@@ -126,19 +126,19 @@
       <div class="input-row">
         <input type="number" step="0.01" id="txAmount" class="input-field" placeholder="Amount (£)" required />
         <select id="txCategory" class="input-field" required>
-          <option value="groceries">Groceries & Home Basics</option>
-          <option value="uni_lunches">Eating Out – Campus Lunches</option>
-          <option value="dinners_social">Eating Out – Social & Dinners</option>
-          <option value="tfl">TfL Public Transport</option>
-          <option value="mobile">Mobile Plan (SIM)</option>
-          <option value="laundry">Laundry & Toiletries</option>
-          <option value="clothing">Clothing & Shopping</option>
-          <option value="study">Study Supplies & Misc.</option>
-          <option value="contingency">Contingency / Rideshare</option>
+          <option value="groceries">Groceries</option>
+          <option value="eating_out_uni">Eating Out - Uni</option>
+          <option value="eating_out_social">Eating Out - Social</option>
+          <option value="tfl">Tfl Public Transport</option>
+          <option value="mobile">Mobile Plan</option>
+          <option value="laundry_toiletries">Laundry and Toiletries</option>
+          <option value="misc">Misc.</option>
+          <option value="study_supplies">Study Supplies</option>
+          <option value="contingency">Contingency</option>
         </select>
       </div>
       <div class="input-row">
-        <input type="text" id="txDesc" class="input-field" placeholder="Note (e.g. Lidl Mile End, Pret)" />
+        <input type="text" id="txDesc" class="input-field" placeholder="Note (e.g. Sainsbury's, Pret)" />
         <input type="date" id="txDate" class="input-field" required />
       </div>
       <button type="submit" id="btnSubmit" class="btn-submit">+ Log Expense</button>
@@ -159,20 +159,19 @@
   </div>
 
   <script>
-    // PASTE YOUR APPS SCRIPT URL HERE:
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPuyDNJ4L3X6BT_y4fL1uN4SH0ZSxY6xynQoSdkPanFWUhGQl1SQbXqQWMI-0Ql6y9Ig/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPuyDNJ4L3X6BT_y4fL1uN4SH0ZSxY6xynQoSdkPanFWUhGQ1lSQbxQqWMI-0Ql6y9Ig/exec";
     const MVR_RATE = 27.3;
 
     const categories = [
-      { id: "groceries", name: "Groceries & Home Basics", budget: 165 },
-      { id: "uni_lunches", name: "Eating Out – Campus Lunches", budget: 195 },
-      { id: "dinners_social", name: "Eating Out – Social & Dinners", budget: 220 },
-      { id: "tfl", name: "TfL Public Transport", budget: 125 },
-      { id: "mobile", name: "Mobile Plan (High Data)", budget: 12 },
-      { id: "laundry", name: "Laundry & Toiletries", budget: 45 },
-      { id: "clothing", name: "Clothing & Casual Shopping", budget: 50 },
-      { id: "study", name: "Study Supplies & Course Misc.", budget: 15 },
-      { id: "contingency", name: "Contingency / Rideshare Buffer", budget: 75 }
+      { id: "groceries", name: "Groceries", budget: 165 },
+      { id: "eating_out_uni", name: "Eating Out - Uni", budget: 195 },
+      { id: "eating_out_social", name: "Eating Out - Social", budget: 220 },
+      { id: "tfl", name: "Tfl Public Transport", budget: 125 },
+      { id: "mobile", name: "Mobile Plan", budget: 12 },
+      { id: "laundry_toiletries", name: "Laundry and Toiletries", budget: 40 },
+      { id: "misc", name: "Misc.", budget: 40 },
+      { id: "study_supplies", name: "Study Supplies", budget: 30 },
+      { id: "contingency", name: "Contingency", budget: 75 }
     ];
 
     let currentMonth = "2026-09";
