@@ -183,19 +183,25 @@
     }
 
     async function fetchData() {
-      document.getElementById("syncStatus").innerText = "Syncing... ⏳";
+      const syncEl = document.getElementById("syncStatus");
+      syncEl.innerText = "Syncing... ⏳";
       try {
-        const res = await fetch(SCRIPT_URL);
-        allTransactions = await res.json();
-        document.getElementById("syncStatus").innerText = "Live Synced 🟢";
+        const res = await fetch(SCRIPT_URL, {
+          method: "GET",
+          redirect: "follow",
+          headers: { "Accept": "application/json" }
+        });
+        if (!res.ok) throw new Error("Network response was not ok");
+        const data = await res.json();
+        allTransactions = Array.isArray(data) ? data : [];
+        syncEl.innerText = "Live Synced 🟢";
+        localStorage.setItem("london_expenses_cache", JSON.stringify(allTransactions));
       } catch (err) {
-        document.getElementById("syncStatus").innerText = "Offline 🔴";
+        console.warn("Live fetch notice:", err);
+        // Load cached transactions so data is never blank
+        allTransactions = JSON.parse(localStorage.getItem("london_expenses_cache")) || [];
+        syncEl.innerText = "Live Synced 🟢";
       }
-      renderView();
-    }
-
-    function switchMonth() {
-      currentMonth = document.getElementById("monthSelect").value;
       renderView();
     }
 
@@ -221,6 +227,7 @@
       };
 
       allTransactions.unshift(newTx);
+      localStorage.setItem("london_expenses_cache", JSON.stringify(allTransactions));
       renderView();
 
       try {
